@@ -1,0 +1,34 @@
+# Build and simulation artifacts
+*.vvp
+*.vcd
+*.fst
+*.log
+*.jou
+*.pb
+*.str
+*.dcp
+*.wdb
+
+# Object and binary outputs
+obj_*/
+*.o
+*.obj
+*.bin
+*.elf
+
+# EDA / Tool directories
+vivado_proj/
+.Xil/
+runs/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
