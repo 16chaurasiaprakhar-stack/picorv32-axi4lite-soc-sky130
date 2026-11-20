@@ -261,7 +261,7 @@ picorv32-axi-soc/
 │   └── top.def                    # Complete routed DEF layout
 ├── reports/                       # Physical signoff & verification reports
 │   ├── metrics.csv                # Complete flow metrics database
-│   ├── manufacturability.rpt      # Final DRC & LVS signoff verification
+│   ├── manufacturability.rpt      # Final DRC & LVS signoff verification 
 │   ├── timing_summary.rpt         # Post-routing STA slack & timing report
 │   ├── power_summary.rpt          # Dynamic and leakage power analysis
 │   ├── clock_skew.rpt             # CTS clock skew analysis
