@@ -63,7 +63,7 @@ The SoC integrates a 32-bit RISC-V core (`PicoRV32`) acting as an AXI4-Lite mast
 |                    - Byte-Lane Write Strobe Routing (WSTRB[3:0])                  |
 |                    - Valid/Ready Handshake Forwarding & Isolation                 |
 +===================================================================================+
-         │                                    │                               │
+         │                                    │                               │ 
          │ [0x0000_0000 - 0x0000_FFFF]        │ [0x0001_0000 - 0x0001_FFFF]   │ [0x1000_0000 - 0x1000_000F]
          ▼                                    ▼                               ▼
 +-----------------------+            +-----------------------+       +-----------------------+
