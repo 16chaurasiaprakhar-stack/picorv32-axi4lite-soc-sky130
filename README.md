@@ -195,7 +195,7 @@ vvp axi_sim.vvp
 iverilog -g2012 -o riscv_axi_sim.vvp rtl/top.v rtl/picorv32.v rtl/uart_axi.v rtl/uart_tx.v rtl/uart_rx.v rtl/axi_lite_interconnect.v rtl/axi_decoder.v rtl/sram.v rtl/rom.v tb/tb_riscv_axi_lite.v
 vvp riscv_axi_sim.vvp
 ```
-
+ 
 #### Method 3: Using Makefile (Linux / WSL / Verilator)
 ```bash
 make uart        # Run UART loopback simulation
