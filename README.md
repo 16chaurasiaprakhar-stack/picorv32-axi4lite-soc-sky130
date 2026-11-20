@@ -323,7 +323,7 @@ picorv32-axi-soc/
 - **The Solution:** Structured [`rtl/rom.v`](rtl/rom.v) with conditional synthesis defines (`SYNTHESIS`), falling back to an unrolled 2048-word `case` statement that synthesizes directly into a combinational cell ROM during OpenLane layout while retaining `$readmemh` for fast testbench turnaround.
 
 ---
-
+ 
 ## License
 
 This project is licensed under the MIT License — feel free to use and adapt it for academic research, open-source silicon projects, or ASIC design portfolios.
