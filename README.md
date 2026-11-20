@@ -313,7 +313,7 @@ picorv32-axi-soc/
 ### 1. AXI4-Lite Backpressure & Buffer Overrun Prevention
 - **The Issue:** Standard microcontrollers running at 50 MHz issue memory-mapped UART writes in single-cycle bursts. Because UART serialization at 115,200 baud requires ~434 clock cycles per bit (4,340 cycles per character), the CPU rapidly overruns the peripheral if no flow control exists.
 - **The Solution:** Implemented an internal holding buffer paired with strict write handshake qualification. If `buf_valid` is asserted, both `s_axi_awready` and `s_axi_wready` are driven low, enforcing hardware bus backpressure. The CPU stalls until the current byte has transferred into the shift register, ensuring 100% data integrity without dropped characters.
-
+ 
 ### 2. Yosys Scoping & Port/Type Name Collision
 - **The Issue:** In synthesis tools such as Yosys, giving a port the same identifier as a instantiated submodule type (e.g., `output uart_tx` inside `uart_axi` instantiating `uart_tx u_tx (...)`) can cause scope-resolution ambiguity. During netlist flattening, the optimizer can misidentify the wire driver and disconnect the output port.
 - **The Solution:** Renamed internal connection ports to `tx_out` and mapped them cleanly at the top-level boundary, ensuring deterministic elaboration across both Yosys and commercial ASIC synthesizers.
