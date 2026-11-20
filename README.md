@@ -109,39 +109,39 @@ The core is integrated as an AMBA AXI4-Lite master:
 - **Bus Interface:** Converts native CPU memory requests into distinct AXI-Lite read and write channel transactions.
 
 ### AXI4-Lite Address Decoder & Crossbar Interconnect
-Implemented across [`rtl/axi_decoder.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/axi_decoder.v) and [`rtl/axi_lite_interconnect.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/axi_lite_interconnect.v):
+Implemented across [`rtl/axi_decoder.v`](rtl/axi_decoder.v) and [`rtl/axi_lite_interconnect.v`](rtl/axi_lite_interconnect.v):
 - **Combinational Address Decoding:** Decode logic checks `awaddr[31:16]` and `araddr[31:16]` in parallel to generate one-hot select signals (`3'b001` for ROM, `3'b010` for SRAM, `3'b100` for UART).
 - **Independent Write/Read Channels:** Read and write transactions operate concurrently without mutual pipeline stalls.
 - **Byte Strobe Support:** Propagates `wstrb[3:0]` down to memory and peripheral targets, enabling granular byte (`sb`), half-word (`sh`), and full-word (`sw`) operations.
 
 ### Full-Duplex UART Peripheral with Hardware Backpressure
-Implemented in [`rtl/uart_axi.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/uart_axi.v), [`rtl/uart_tx.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/uart_tx.v), and [`rtl/uart_rx.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/uart_rx.v):
+Implemented in [`rtl/uart_axi.v`](rtl/uart_axi.v), [`rtl/uart_tx.v`](rtl/uart_tx.v), and [`rtl/uart_rx.v`](rtl/uart_rx.v):
 - **Hardware Backpressure:** In conventional UART designs, CPU writes to a busy TX buffer are either silently dropped or overwrite pending data. In this design, `s_axi_awready` and `s_axi_wready` are held low whenever an active byte is being serialized and the holding buffer is full. This forces the CPU bus master to wait gracefully without losing data or hanging the bus.
 - **Robust RX Sampling:** Features a mid-bit sampling engine that oversamples incoming asynchronous serial lines to prevent edge jitter and ensure high noise immunity at 115,200 baud.
 - **ASIC Cleanliness:** Zero latch inference, strict non-blocking register updates, explicit active-high reset, and decoupled port naming to avoid Yosys hierarchy collisions.
 
 ### Dual-Mode Boot ROM & 64 KB Scratchpad SRAM
-- **Dual-Mode Boot ROM ([`rtl/rom.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/rom.v)):** Supports both pure combinational synthesis (via an unrolled case statement structure for standard cell ASIC synthesis) and memory-file initialization (via `$readmemh("rom.hex")` for behavioral simulation).
-- **Single-Cycle SRAM ([`rtl/sram.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/sram.v)):** 16,384 entries × 32-bit memory array with individual byte-lane write strobe handling.
+- **Dual-Mode Boot ROM ([`rtl/rom.v`](rtl/rom.v)):** Supports both pure combinational synthesis (via an unrolled case statement structure for standard cell ASIC synthesis) and memory-file initialization (via `$readmemh("rom.hex")` for behavioral simulation).
+- **Single-Cycle SRAM ([`rtl/sram.v`](rtl/sram.v)):** 16,384 entries × 32-bit memory array with individual byte-lane write strobe handling.
 
 ---
 
 ## Hardware-Software Co-Design & Bare-Metal Firmware
 
-The SoC includes a bare-metal C runtime and startup sequence located in [`fw/`](file:///C:/Users/prakh/Project/picorv32-axi-soc/fw/):
+The SoC includes a bare-metal C runtime and startup sequence located in [`fw/`](fw/):
 
-1. **Reset Sequence ([`fw/start.s`](file:///C:/Users/prakh/Project/picorv32-axi-soc/fw/start.s)):**
+1. **Reset Sequence ([`fw/start.s`](fw/start.s)):**
    - Sets up the stack pointer (`sp = 0x0001FFF0`) inside scratchpad SRAM.
    - Clears `.bss` section memory.
    - Jumps to C entry point `main()`.
-2. **C Runtime Execution ([`fw/main.c`](file:///C:/Users/prakh/Project/picorv32-axi-soc/fw/main.c)):**
+2. **C Runtime Execution ([`fw/main.c`](fw/main.c)):**
    - Declares `volatile` memory-mapped I/O pointers to UART hardware registers.
    - Outputs the greeting string:
      ```
      "Hello Prakhar Chaurasia!\n"
      ```
    - Enters a polling echo loop: continuously samples `UART_STATUS` for received bytes and echoes them back over `UART_TX`.
-3. **Linker Script ([`fw/linker.ld`](file:///C:/Users/prakh/Project/picorv32-axi-soc/fw/linker.ld)):**
+3. **Linker Script ([`fw/linker.ld`](fw/linker.ld)):**
    - Maps `.text` and `.rodata` directly to ROM at `0x00000000`.
    - Maps `.data` and `.bss` to SRAM at `0x00010000`.
 
@@ -211,7 +211,7 @@ make all         # Run entire simulation suite sequentially
 
 The SoC is configured for automated physical design targeting the open-source **SkyWater 130nm High-Density Standard Cell Library (`sky130_fd_sc_hd`)**.
 
-### Physical Design Parameters ([`openlane/config.json`](file:///C:/Users/prakh/Project/picorv32-axi-soc/openlane/config.json))
+### Physical Design Parameters ([`openlane/config.json`](openlane/config.json))
 
 | Parameter | Value | Design Rationale |
 | :--- | :--- | :--- |
@@ -221,6 +221,26 @@ The SoC is configured for automated physical design targeting the open-source **
 | **Clock Tree Skew** | < 150 ps (`CTS_TARGET_SKEW: 150`) | Low-jitter clock delivery using `sky130_fd_sc_hd__clkbuf_16` buffers |
 | **Power Distribution** | Met4 / Met5 vertical & horizontal | 25 µm pitch grid with 5 µm offset for stable VDD/GND IR drop profile |
 | **Antenna Protection** | Heuristic diode insertion (`MODE: 3`) | Protects thin gate oxides from plasma charge damage during metal etch |
+
+### Post-Layout Signoff Results & Verification Metrics
+
+| Metric | Result | Target / Limit | Status |
+| :--- | :--- | :--- | :--- |
+| **PDK Process** | SkyWater 130nm (`sky130_fd_sc_hd`) | 130nm CMOS | ✅ Verified |
+| **Flow Status** | `flow completed` | Automated signoff flow | ✅ Passed (48m 29s) |
+| **Magic DRC Violations** | **0** | 0 violations | ✅ **100% Clean** |
+| **LVS Verification** | **26,364 / 26,364 nets matched** | Full netlist match | ✅ **Clean LVS** |
+| **Setup Timing Slack (Worst)** | **+13.72 ns** | $\ge 0\text{ ns}$ | ✅ Timing Closed |
+| **Hold Timing Slack (Worst)** | **+0.68 ns** | $\ge 0\text{ ns}$ | ✅ Timing Closed |
+| **Worst Negative Slack (WNS)** | **0.00 ns** | 0.00 ns | ✅ Zero Slack |
+| **Total Negative Slack (TNS)** | **0.00 ns** | 0.00 ns | ✅ Zero Slack |
+| **Operating Frequency** | **50.0 MHz** ($T_{\text{clk}} = 20.0\text{ ns}$) | 50.0 MHz | ✅ Achieved |
+| **Critical Path Delay** | **2.03 ns** | $< 20.0\text{ ns}$ | ✅ Timing Met |
+| **Die Area** | $1.00\text{ mm}^2$ ($1000\,\mu\text{m} \times 1000\,\mu\text{m}$) | $1.0\text{ mm}^2$ | ✅ Verified |
+| **Core Area** | $0.965\text{ mm}^2$ ($965,289.5\times 10^{-6}\text{ mm}^2$) | - | ✅ Verified |
+| **Standard Cell Count** | **26,359 logic cells** (134,648 total incl. fill/decap) | - | ✅ Verified |
+| **Total Wirelength** | $1,033,926\,\mu\text{m}$ (~1.03 m, 213,722 vias) | - | ✅ Fully Routed |
+| **Total Power (Typical)** | **37.3 mW** (55.1% Internal, 44.9% Switching) | - | ✅ Low Power |
 
 ### Running Physical Synthesis & Layout
 ```bash
@@ -235,6 +255,17 @@ flow.tcl -design .
 
 ```
 picorv32-axi-soc/
+├── gds/                           # Final tapeout mask layout
+│   └── top.gds                    # Golden GDSII stream file (SkyWater 130nm)
+├── def/                           # Physical design placement & routing
+│   └── top.def                    # Complete routed DEF layout
+├── reports/                       # Physical signoff & verification reports
+│   ├── metrics.csv                # Complete flow metrics database
+│   ├── manufacturability.rpt      # Final DRC & LVS signoff verification
+│   ├── timing_summary.rpt         # Post-routing STA slack & timing report
+│   ├── power_summary.rpt          # Dynamic and leakage power analysis
+│   ├── clock_skew.rpt             # CTS clock skew analysis
+│   └── openlane.log               # Complete automated flow execution log
 ├── rtl/                           # Synthesizable RTL source files
 │   ├── top.v                      # SoC top-level module (CPU + Interconnect + Peripherals)
 │   ├── picorv32.v                 # PicoRV32 RISC-V CPU core
@@ -247,6 +278,7 @@ picorv32-axi-soc/
 │   ├── sram.v                     # 64 KB single-cycle synchronous SRAM
 │   ├── rom.v                      # 8 KB dual-mode Boot ROM
 │   └── rom.hex                    # Pre-compiled bootloader binary image
+├── src/                           # Local RTL copies for OpenLane environment
 ├── tb/                            # Verification testbenches
 │   ├── tb_top.v                   # Full-chip system-level testbench
 │   ├── tb_debug.v                 # System-level testbench with structured verification logging
@@ -262,12 +294,16 @@ picorv32-axi-soc/
 │   ├── config.json                # OpenLane synthesis & PnR configuration
 │   ├── pin_order.cfg              # Chip IO pin placement constraints
 │   ├── top.sdc                    # Synopsys Design Constraints (50 MHz clock definition)
-│   └── src/                       # Local RTL copies for OpenLane environment
+│   └── src/                       # Local RTL sources
 ├── scripts/                       # Automation scripts
 │   ├── run_sim_all.bat            # Automated Windows simulation regression script
 │   └── run_commands.txt           # Detailed command guide for Verilator, Icarus & Yosys
 ├── Makefile                       # Unified build and simulation makefile
-└── .gitignore                     # Git ignore rules for build artifacts and VCD dumps
+├── config.json                    # Root OpenLane configuration
+├── pin_order.cfg                  # Root pin order configuration
+├── top.sdc                        # Root timing constraints
+├── LICENSE                        # MIT License
+└── .gitignore                     # Git ignore rules for build artifacts and scratch folders
 ```
 
 ---
@@ -284,7 +320,7 @@ picorv32-axi-soc/
 
 ### 3. Dual-Mode Boot ROM Architecture
 - **The Issue:** Behavioral `$readmemh` memory initialization is ideal for fast cycle-accurate simulation in Icarus/Verilator, but standard cell ASIC flows without SRAM compilers require combinational standard cell gates or read-only macro blocks.
-- **The Solution:** Structured [`rtl/rom.v`](file:///C:/Users/prakh/Project/picorv32-axi-soc/rtl/rom.v) with conditional synthesis defines (`SYNTHESIS`), falling back to an unrolled 2048-word `case` statement that synthesizes directly into a combinational cell ROM during OpenLane layout while retaining `$readmemh` for fast testbench turnaround.
+- **The Solution:** Structured [`rtl/rom.v`](rtl/rom.v) with conditional synthesis defines (`SYNTHESIS`), falling back to an unrolled 2048-word `case` statement that synthesizes directly into a combinational cell ROM during OpenLane layout while retaining `$readmemh` for fast testbench turnaround.
 
 ---
 

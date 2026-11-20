@@ -3,6 +3,7 @@
 *.vcd
 *.fst
 *.log
+!reports/*.log
 *.jou
 *.pb
 *.str
