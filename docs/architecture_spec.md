@@ -73,7 +73,7 @@ The SoC implements all 5 independent AXI4-Lite channels:
 - **Read-Only:**
   - Bit `[0]`: `tx_busy` (1 if transmitter is actively shifting a byte).
   - Bit `[1]`: `rx_valid` (1 if received byte is ready).
-  - Bits `[31:2]`: Reserved (`0`).
+  - Bits `[31:2]`: Reserved (`0`). 
   - *Non-Destructive:* Reading this register does NOT pop or clear the RX buffer, enabling safe non-destructive polling loops.
 
 ---
