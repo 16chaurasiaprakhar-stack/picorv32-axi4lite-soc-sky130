@@ -9,7 +9,7 @@
 **Author:** Prakhar Chaurasia  
 **Role:** Digital IC & RTL Design Engineer  
 **Focus:** RISC-V Microarchitecture, AMBA Interconnects, ASIC Implementation & Verification  
-
+ 
 ---
 
 ## Table of Contents
