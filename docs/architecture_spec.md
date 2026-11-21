@@ -16,7 +16,7 @@ The PicoRV32-AXI-SoC is a 32-bit System-on-Chip (SoC) based on the RISC-V RV32I 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `S0` | Boot ROM | `0x0000_0000` | `0x0000_FFFF` | 64 KB (8 KB active) | R | Reset vector, bootloader C runtime |
 | `S1` | Data SRAM | `0x0001_0000` | `0x0001_FFFF` | 64 KB | R/W | Scratchpad data memory, stack (`sp`) |
-| `S2` | UART IP | `0x1000_0000` | `0x1000_000F` | 16 Bytes | R/W | Serial TX/RX and status registers |
+| `S2` | UART IP | `0x1000_0000` | `0x1000_000F`   | 16 Bytes | R/W | Serial TX/RX and status registers |
 
 ---
 
