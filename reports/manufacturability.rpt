@@ -1,6 +1,6 @@
 Design Name: top
 Run Directory: /openlane/designs/picorv32-axi-soc/runs/run_signoff
-----------------------------------------
+---------------------------------------- 
 
 Magic DRC Summary:
 Source: /openlane/designs/picorv32-axi-soc/runs/run_signoff/reports/signoff/drc.rpt
