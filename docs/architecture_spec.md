@@ -4,7 +4,7 @@
 **Target:** AMBA AXI4-Lite Interconnect & Peripherals  
 
 ---
-
+ 
 ## 1. System Overview
 The PicoRV32-AXI-SoC is a 32-bit System-on-Chip (SoC) based on the RISC-V RV32I instruction set architecture. It features an integrated AMBA AXI4-Lite interconnect matrix connecting the core CPU master to an 8 KB Boot ROM, a 64 KB Scratchpad SRAM, and a full-duplex memory-mapped UART controller.
 
