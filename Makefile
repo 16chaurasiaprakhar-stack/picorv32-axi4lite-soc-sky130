@@ -1,6 +1,6 @@
 # =============================================================================
 # Author       : Prakhar Chaurasia
-# Role         : Digital IC & RTL Design Engineer
+# Role         : Digital IC & RTL Design Engineer 
 # Project      : RISC-V SoC Architecture & Silicon Design
 # =============================================================================
 # Makefile – Verilog TB ONLY (Verilator --binary flow)
