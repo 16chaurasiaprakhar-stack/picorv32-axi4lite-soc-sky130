@@ -1,7 +1,7 @@
 # Build and simulation artifacts
 *.vvp
 *.vcd
-*.fst
+*.fst 
 *.log
 !reports/*.log
 *.jou
