@@ -87,7 +87,7 @@ module uart_tx #(
                         state   <= DATA;
                     end else begin
                         clk_cnt <= clk_cnt + 1;
-                    end
+                    end 
                 end
 
                 DATA: begin
@@ -96,7 +96,7 @@ module uart_tx #(
                         clk_cnt   <= 0;
                         shift_reg <= {1'b0, shift_reg[7:1]};
                         if (bit_cnt == 7) begin
-                            state <= STOP;
+                            state <= STOP; 
                         end else begin
                             bit_cnt <= bit_cnt + 1;
                         end
@@ -115,7 +115,7 @@ module uart_tx #(
                     end
                 end
 
-                default: state <= IDLE;
+                default: state <= IDLE; 
 
             endcase
         end
