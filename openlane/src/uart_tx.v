@@ -18,7 +18,7 @@ ASIC-clean version:
 // uart_tx.v – Simple 8N1 UART Transmitter
 // =============================================================================
 
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps 
 
 module uart_tx #(
     parameter CLK_FREQ  = 50_000_000,
