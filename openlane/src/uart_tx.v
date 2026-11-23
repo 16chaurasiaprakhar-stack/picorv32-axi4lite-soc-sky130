@@ -40,7 +40,7 @@ module uart_tx #(
     localparam integer CLKS_PER_BIT = CLK_FREQ / BAUD_RATE;
 
     // -------------------------------------------------------------------------
-    // State machine
+    // State machine 
     // -------------------------------------------------------------------------
     localparam IDLE  = 2'b00;
     localparam START = 2'b01; 
