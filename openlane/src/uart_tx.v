@@ -43,7 +43,7 @@ module uart_tx #(
     // State machine
     // -------------------------------------------------------------------------
     localparam IDLE  = 2'b00;
-    localparam START = 2'b01;
+    localparam START = 2'b01; 
     localparam DATA  = 2'b10;
     localparam STOP  = 2'b11;
 
