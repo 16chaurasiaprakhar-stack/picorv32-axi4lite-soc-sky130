@@ -47,7 +47,7 @@ module uart_top #(
     parameter BAUD_RATE = 115_200 
 )(
     input            clk,
-    input            reset,
+    input            reset, 
 
     // ── Transmit interface ───────────────────────────────────────────────────
     input      [7:0] tx_data,   // byte to send
