@@ -44,7 +44,7 @@ Parameters
 
 module uart_top #(
     parameter CLK_FREQ  = 50_000_000,
-    parameter BAUD_RATE = 115_200
+    parameter BAUD_RATE = 115_200 
 )(
     input            clk,
     input            reset,
@@ -87,4 +87,4 @@ module uart_top #(
         .data_valid (rx_valid)
     );
 
-endmodule
+endmodule 
