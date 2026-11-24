@@ -60,7 +60,7 @@ module uart_top #(
 );
 
     // ── Internal serial loopback wire ────────────────────────────────────────
-    wire serial_line;           // TX serial output → RX serial input
+    wire serial_line;           // TX serial output → RX serial input 
 
     // ── UART Transmitter ─────────────────────────────────────────────────────
     uart_tx #(
