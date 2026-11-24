@@ -15,7 +15,7 @@ No AXI. No CPU. Pure UART datapath.
 Interface
 ---------
   clk       : 50 MHz system clock
-  reset     : active-high synchronous reset
+  reset     : active-high synchronous reset 
 
   tx_data   : 8-bit byte to transmit
   tx_valid  : assert 1 cycle when tx_data is valid (handshake with tx_ready)
@@ -24,7 +24,7 @@ Interface
   rx_data   : 8-bit byte received (valid when rx_valid pulses HIGH for 1 cycle)
   rx_valid  : 1-cycle pulse when a byte has been successfully received
 
-Loopback
+Loopback 
 --------
   uart_tx output (serial_line) is wired directly to uart_rx input.
   This means every byte sent via tx_data/tx_valid will be echoed back
@@ -40,7 +40,7 @@ Parameters
   BAUD_RATE : UART baud rate                default 115 200
 */
 
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps 
 
 module uart_top #(
     parameter CLK_FREQ  = 50_000_000,
