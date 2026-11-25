@@ -15,7 +15,7 @@ ASIC-clean version:
   - data_out/data_valid outputs declared without initializers
 */
 
-`timescale 1ns / 1ps
+`timescale 1ns / 1ps 
 
 module uart_rx #(
     parameter CLK_FREQ  = 50_000_000,
