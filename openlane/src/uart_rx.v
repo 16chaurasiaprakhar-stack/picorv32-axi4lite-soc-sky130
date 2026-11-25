@@ -63,7 +63,7 @@ module uart_rx #(
     wire rx_s = rx_sync1;
 
     // -------------------------------------------------------------------------
-    // Receiver registers — NO inline initializers
+    // Receiver registers — NO inline initializers 
     // -------------------------------------------------------------------------
     reg  [1:0]                    state;
     reg  [$clog2(CLKS_PER_BIT):0] clk_cnt;
