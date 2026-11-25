@@ -42,7 +42,7 @@ module uart_rx #(
     localparam IDLE  = 2'b00;
     localparam START = 2'b01;
     localparam DATA  = 2'b10;
-    localparam STOP  = 2'b11;
+    localparam STOP  = 2'b11; 
 
     // -------------------------------------------------------------------------
     // 2-FF Synchronizer — NO inline initializers (removed for ASIC-clean)
