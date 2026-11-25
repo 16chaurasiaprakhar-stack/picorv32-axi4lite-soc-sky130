@@ -2,7 +2,7 @@
 ------------------------------------------------------------------------------
  Author       : Prakhar Chaurasia
  Role         : Digital IC & RTL Design Engineer
- Project      : RISC-V SoC Architecture & Silicon Design
+ Project      : RISC-V SoC Architecture & Silicon Design 
 ------------------------------------------------------------------------------
 
 MODULE OVERVIEW
