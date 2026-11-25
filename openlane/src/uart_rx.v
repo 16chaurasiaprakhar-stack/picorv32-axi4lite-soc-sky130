@@ -52,7 +52,7 @@ module uart_rx #(
 
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            rx_sync0 <= 1'b1;   // idle = HIGH
+            rx_sync0 <= 1'b1;   // idle =  HIGH
             rx_sync1 <= 1'b1;
         end else begin
             rx_sync0 <= rx;
