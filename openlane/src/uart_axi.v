@@ -54,7 +54,7 @@ module uart_axi #(
     input         s_axi_rready,
 
     // UART signals
-    output        tx_out,      // renamed: avoids collision with submodule type `uart_tx`
+    output        tx_out,      // renamed: avoids collision with submodule  type `uart_tx`
     input         uart_rx
 );
 
@@ -100,7 +100,7 @@ module uart_axi #(
         .rx         (uart_rx),
         .data_out   (rx_data_raw),
         .data_valid (rx_data_valid_pulse)
-    );
+    ); 
 
     // -------------------------------
     // TX buffer (1-byte buffer)
