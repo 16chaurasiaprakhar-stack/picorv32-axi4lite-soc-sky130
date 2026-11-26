@@ -7,7 +7,7 @@
 
 MODULE OVERVIEW
 ---------------
-UART peripheral connected to an AXI-Lite bus (full-duplex TX+RX).
+UART peripheral connected to an AXI-Lite bus (full-duplex TX+RX):
 
 ASIC-clean version:
   - Removed all inline reg initializers (= value)
