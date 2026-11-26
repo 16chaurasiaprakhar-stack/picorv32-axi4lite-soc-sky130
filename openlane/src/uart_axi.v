@@ -67,7 +67,6 @@ module uart_axi #(
 
     // ── TX serial output: directly connected from u_tx instance ────────────
     // Port renamed tx_out (was uart_tx) to avoid Yosys scope-resolution
-    // confusion between the output PORT name and the submodule TYPE name
     // `uart_tx`.  With identical identifiers, opt_clean removes the driver
     // of the port after flatten, producing "uart_tx has no driver".
     // Renaming the port eliminates the ambiguity at the source.
