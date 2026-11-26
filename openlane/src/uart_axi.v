@@ -241,9 +241,9 @@ module uart_axi #(
                     r_data <= {23'b0, rx_buf_valid, rx_buf_data};
             end
 
-            // Complete read transaction
+            // Complete read transaction 
             if (r_vld && s_axi_rready)
-                r_vld <= 1'b0;
+                r_vld <= 1'b0; 
         end
     end
 
