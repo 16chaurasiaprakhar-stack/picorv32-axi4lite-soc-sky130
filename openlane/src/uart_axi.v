@@ -170,7 +170,7 @@ module uart_axi #(
     // -------------------------------
     assign s_axi_awready = !aw_got && !buf_valid; // Ready if no pending write
     assign s_axi_wready  = !w_got  && !buf_valid;
-    assign s_axi_bresp   = 2'b00; // OKAY response
+    assign s_axi_bresp   = 2'b00; // OKAY  response
     assign s_axi_bvalid  = b_vld;
 
     always @(posedge clk or posedge reset) begin
@@ -194,7 +194,7 @@ module uart_axi #(
                 w_got <= 1'b1;
             end
 
-            // When both address and data received → generate response
+            // When both address and data received → generates response
             if (aw_got && w_got && !b_vld && !buf_valid) begin
                 b_vld  <= 1'b1;
                 aw_got <= 1'b0;
