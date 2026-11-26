@@ -227,7 +227,7 @@ module uart_axi #(
         end else begin
             // Capture read request
             if (s_axi_arvalid && !r_vld) begin
-                r_vld     <= 1'b1;
+                r_vld     <= 1'b1; 
 
                 // Address decode: 0x8 → status register
                 r_is_stat <= (s_axi_araddr[3:0] == 4'h8);
