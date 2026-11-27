@@ -95,7 +95,7 @@ module top (
     //   ST_IDLE  – waiting for cpu_mem_valid
     //   ST_WR_AW – issuing AW (and W simultaneously)
     //   ST_WR_B  – waiting for B (write response)
-    //   ST_RD_AR – issuing AR
+    //   ST_RD_AR – issuing AR  
     //   ST_RD_R  – waiting for R data
     // =========================================================================
 
