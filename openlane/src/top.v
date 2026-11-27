@@ -245,7 +245,7 @@ module top (
     wire [31:0] s2_rdata;   wire [1:0] s2_rresp; wire s2_rvalid; wire s2_rready;
 
     // =========================================================================
-    // AXI-Lite Interconnect
+    // AXI-Lite Interconnect 《---》
     // =========================================================================
     axi_lite_interconnect u_interconnect (
         .clk            (clk),   .reset          (reset),
