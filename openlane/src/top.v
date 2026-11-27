@@ -310,7 +310,7 @@ module top (
     // =========================================================================
     // UART – Slave 2
     // =========================================================================
-    // uart_tx_int: connects uart_axi's tx_out port to the top-level uart_tx.
+    // uart_tx_int: connects uart_axi's tx_out port to the top-level uart_tx .
     // Port renamed tx_out (not uart_tx) to eliminate the Yosys scope-resolver
     // collision between the output port name and the uart_tx submodule type.
     wire uart_tx_int;
