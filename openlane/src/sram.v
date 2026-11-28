@@ -38,7 +38,7 @@ module sram #(
     input         s_axi_wvalid,
     output        s_axi_wready,
 
-    // AXI-Lite Slave – Write Response Channel
+    // AXI-Lite Slave – Write Response Channel 
     output [ 1:0] s_axi_bresp,
     output        s_axi_bvalid,
     input         s_axi_bready,
