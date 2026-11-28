@@ -6,9 +6,9 @@
 ------------------------------------------------------------------------------
 */
 // =============================================================================
-// sram.v – AXI-Lite Read/Write SRAM
+// sram.v – AXI-Lite Read/Write SRAM 
 // =============================================================================
-// Parameters:
+// Parameters:-
 //   MEM_DEPTH  : Number of 32-bit words (default 2048 = 8 KB)
 //
 // Full AXI-Lite slave supporting byte-enable writes.
