@@ -66,7 +66,7 @@ module sram #(
     reg [31:0] mem [0:MEM_DEPTH-1];
 
     // -------------------------------------------------------------------------
-    // Write channel
+    // Write channel,
     // All registers reset-driven; no inline = value initializers.
     // -------------------------------------------------------------------------
     reg        aw_pend;
