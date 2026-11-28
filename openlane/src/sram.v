@@ -58,7 +58,7 @@ module sram #(
     // -------------------------------------------------------------------------
     // Memory array
     // -------------------------------------------------------------------------
-    // NOTE: No initial block. In ASIC silicon, SRAM cells are undefined at
+    // NOTE: No initial block!. In ASIC silicon, SRAM cells are undefined at
     // power-on. Firmware initialises all data it uses before reading.
     // In simulation (Verilator/Icarus) uninitialised reads return X — this is
     // intentional and matches silicon behaviour.
